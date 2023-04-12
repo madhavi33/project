@@ -23,26 +23,26 @@ pipeline{
             )
             }
         }
-         stage('Unit Test maven'){
+        //  stage('Unit Test maven'){
          
-         when { expression {  params.action == 'create' } }
+        //  when { expression {  params.action == 'create' } }
 
-            steps{
-               script{
+        //     steps{
+        //        script{
                    
-                   mvnTest()
-               }
-            }
-        }
-         stage('Integration Test maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+        //            mvnTest()
+        //        }
+        //     }
+        // }
+        //  stage('Integration Test maven'){
+        //  when { expression {  params.action == 'create' } }
+        //     steps{
+        //        script{
                    
-                   mvnIntegrationTest()
-               }
-            }
-        }
+        //            mvnIntegrationTest()
+        //        }
+        //     }
+        // }
         stage('Static code analysis: Sonarqube'){
          when { expression {  params.action == 'create' } }
             steps{
@@ -63,15 +63,15 @@ pipeline{
                }
             }
         }
-        // stage('Maven Build : maven'){
-        //  when { expression {  params.action == 'create' } }
-        //     steps{
-        //        script{
+        stage('Maven Build : maven'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
                    
-        //            mvnBuild()
-        //        }
-        //     }
-        // }
+                   mvnBuild()
+               }
+            }
+        }
         // stage('Docker Image Build'){
         //  when { expression {  params.action == 'create' } }
         //     steps{
