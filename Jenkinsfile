@@ -48,21 +48,21 @@ pipeline{
             steps{
                script{
                    
-                   def SonarQubecredentialsId = 'sonarqube-api'
+                   def SonarQubecredentialsId = 'sonarqube1-api'
                    statiCodeAnalysis(SonarQubecredentialsId)
                }
             }
         }
-        // stage('Quality Gate Status Check : Sonarqube'){
-        //  when { expression {  params.action == 'create' } }
-        //     steps{
-        //        script{
+        stage('Quality Gate Status Check : Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
                    
-        //            def SonarQubecredentialsId = 'sonarqube-api'
-        //            QualityGateStatus(SonarQubecredentialsId)
-        //        }
-        //     }
-        // }
+                   def SonarQubecredentialsId = 'sonarqube1-api'
+                   QualityGateStatus(SonarQubecredentialsId)
+               }
+            }
+        }
         // stage('Maven Build : maven'){
         //  when { expression {  params.action == 'create' } }
         //     steps{
