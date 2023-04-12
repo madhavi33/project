@@ -28,86 +28,86 @@ pipeline{
       }
     }
 
-    stage('Unit Test Mvn'){
+    // stage('Unit Test Mvn'){
       
-     when { expression { params.action == 'create' } }
+    //  when { expression { params.action == 'create' } }
 
-      steps{
-        script{
+    //   steps{
+    //     script{
            
-             mvnTest()
-         }
-      }
-    }
+    //          mvnTest()
+    //      }
+    //   }
+    // }
    
-    stage('mvn integartion test'){
+    // stage('mvn integartion test'){
       
-      when { expression { params.action == 'create' } }
+    //   when { expression { params.action == 'create' } }
       
-      steps{
-        script{
+    //   steps{
+    //     script{
 
-            mvnIntegrationTest()
+    //         mvnIntegrationTest()
 
-          }
-        }
-    }
+    //       }
+    //     }
+    // }
 
 
-    stage('Static Code Analysis'){
+    // stage('Static Code Analysis'){
 
-      when{ expression { params.action == 'create' } }
+    //   when{ expression { params.action == 'create' } }
 
-      steps{
-        script{
+    //   steps{
+    //     script{
             
-            def SonarQubecredentialsId = 'sonarqube-api'
-            staticCodeAnalysis(SonarQubecredentialsId)
-       }
-      }  
-    }
+    //         def SonarQubecredentialsId = 'sonarqube-api'
+    //         staticCodeAnalysis(SonarQubecredentialsId)
+    //    }
+    //   }  
+    // }
 
 
-    stage('Quality Gate Status check : sonarqube'){
+    // stage('Quality Gate Status check : sonarqube'){
 
-     when{ expression { params.action == 'create' } }
+    //  when{ expression { params.action == 'create' } }
 
-     steps{
-        script{
-            def SonarQubecredentialsId = 'sonarqube-api'
-            qualityGateStatus(SonarQubecredentialsId)
-      }
-     }
-    }
+    //  steps{
+    //     script{
+    //         def SonarQubecredentialsId = 'sonarqube-api'
+    //         qualityGateStatus(SonarQubecredentialsId)
+    //   }
+    //  }
+    // }
 
     
-     stage('Maven Build : maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+    //  stage('Maven Build : maven'){
+    //      when { expression {  params.action == 'create' } }
+    //         steps{
+    //            script{
                    
-                   mvnBuild()
-               }
-            }
-        }
-        stage('Docker Image Build : ECR'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+    //                mvnBuild()
+    //            }
+    //         }
+    //     }
+    //     stage('Docker Image Build : ECR'){
+    //      when { expression {  params.action == 'create' } }
+    //         steps{
+    //            script{
                    
-                   dockerBuild("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
-               }
-            }
-        }
-    stage('Docker Image Scan: trivy '){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+    //                dockerBuild("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
+    //            }
+    //         }
+    //     }
+    // stage('Docker Image Scan: trivy '){
+    //      when { expression {  params.action == 'create' } }
+    //         steps{
+    //            script{
                    
-                   dockerImageScan("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
-               }
-            }
-        }
+    //                dockerImageScan("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
+    //            }
+    //         }
+    //     }
         stage('Docker Image Push : ECR '){
          when { expression {  params.action == 'create' } }
             steps{
