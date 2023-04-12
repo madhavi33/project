@@ -90,15 +90,15 @@ pipeline{
                }
             }
         }
-        // stage('Docker Image Push : DockerHub '){
-        //  when { expression {  params.action == 'create' } }
-        //     steps{
-        //        script{
+        stage('Docker Image Push : DockerHub '){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
                    
-        //            dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
-        //        }
-        //     }
-        // }   
+                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+               }
+            }
+        }   
         // stage('Docker Image Cleanup : DockerHub '){
         //  when { expression {  params.action == 'create' } }
         //     steps{
