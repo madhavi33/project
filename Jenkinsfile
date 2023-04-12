@@ -43,35 +43,35 @@ pipeline{
                }
             }
         }
-        stage('Static code analysis: Sonarqube'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+        // stage('Static code analysis: Sonarqube'){
+        //  when { expression {  params.action == 'create' } }
+        //     steps{
+        //        script{
                    
-                   def SonarQubecredentialsId = 'sonarqube-api'
-                   staticCodeAnalysis(SonarQubecredentialsId)
-               }
-            }
-        }
-        stage('Quality Gate Status Check : Sonarqube'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+        //            def SonarQubecredentialsId = 'sonarqube-api'
+        //            staticCodeAnalysis(SonarQubecredentialsId)
+        //        }
+        //     }
+        // }
+        // stage('Quality Gate Status Check : Sonarqube'){
+        //  when { expression {  params.action == 'create' } }
+        //     steps{
+        //        script{
                    
-                   def SonarQubecredentialsId = 'sonarqube-api'
-                   qualityGateStatus(SonarQubecredentialsId)
-               }
-            }
-        }
-        stage('Maven Build : maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
+        //            def SonarQubecredentialsId = 'sonarqube-api'
+        //            qualityGateStatus(SonarQubecredentialsId)
+        //        }
+        //     }
+        // }
+        // stage('Maven Build : maven'){
+        //  when { expression {  params.action == 'create' } }
+        //     steps{
+        //        script{
                    
-                   mvnBuild()
-               }
-            }
-        }
+        //            mvnBuild()
+        //        }
+        //     }
+        // }
         // stage('Docker Image Build'){
         //  when { expression {  params.action == 'create' } }
         //     steps{
