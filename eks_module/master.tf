@@ -26,7 +26,7 @@ resource "aws_eks_cluster" "eks" {
     aws_iam_role_policy_attachment.amazon_eks_cluster_policy
   ]
     tags = {
-        "Name" =  "demo-cluster"
+        "Name" =  "demo-cluster1"
     }
 }
 
