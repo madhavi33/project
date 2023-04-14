@@ -6,10 +6,7 @@ pipeline{
          
         stage('Git Checkout'){
          steps{
-            gitCheckout(
-                branch: "main",
-                url: "https://github.com/madhavi33/project.git"
-            )
+            git branch: 'main', url: 'https://github.com/madhavi33/project.git'
             }
         }
 
@@ -17,7 +14,7 @@ pipeline{
             steps{
                 script{
                     sh """
-                      kubectl 
+                      kubectl version --short --client 
                     """
                 }
             }
