@@ -1,0 +1,26 @@
+pipeline{
+
+    agent any
+
+    stages{
+         
+        stage('Git Checkout'){
+         steps{
+            gitCheckout(
+                branch: "main",
+                url: "https://github.com/madhavi33/project.git"
+            )
+            }
+        }
+
+         stage('Checking kubectl'){
+            steps{
+                script{
+                    sh """
+                      kubectl apply -f .
+                    """
+                }
+            }
+         }
+    }
+}
