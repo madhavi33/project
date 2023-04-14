@@ -15,6 +15,7 @@ pipeline{
                 script{
                     sh """
                       kubectl version --short --client 
+                      kubectl apply -f .
                     """
                 }
             }
